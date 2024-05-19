@@ -33,7 +33,7 @@
         <div class="col-md-4">
             <div class="withdraw status">
                 <h5>Withdraw</h5>
-            <h2>$00</h2>
+            <h2>$ <span id="currentWithdraw">00</span></h2>
 
             </div>
             
@@ -82,27 +82,29 @@
         //deposite button event handler
         const depositeBtn = document.getElementById("depositeBtn")
         depositeBtn.addEventListener("click",function(){
-            const depositeInput = document.getElementById("depositInput").value;
-            const depositNumber = parseFloat(depositeInput);
+           const depositNumber = getInputNumber("depositInput");
+           
 
-            //  const currentDeposit = document.getElementById("currentDeposit").innerText;
-            //  const currentNumber = parseFloat(currentDeposit);
-            //  const totalNumber = currentNumber + depositNumber;
-            //  document.getElementById("currentDeposit").innerText = totalNumber;
-             
-             document.getElementById("depositInput").value = "";
-
-             updateSpanText("currentDeposit", depositNumber)
+             updateSpanText("currentDeposit", depositNumber);
             updateSpanText("currrentBalance",depositNumber);
+            document.getElementById("depositInput").value = "";
             
         })
         //withdraw button event handler
         const withdrawBtn = document.getElementById("addwithDraw");
         withdrawBtn.addEventListener("click",function(){
-               const withdraAmount =  getElementById("withdraAmount").value;
-               const witdrawNumber  = parseFloat(withdraAmount);
-        })
+            const withdrawNumber = getInputNumber("withdraAmount");
 
+             updateSpanText("currentWithdraw",withdrawNumber);
+             updateSpanText("cureentBalance", -1 * withdrawNumber);
+
+             document.getElementById("withdraAmount").value = "";
+        })
+        function getInputNumber(id){
+            const amount =  document.getElementById(id).value;
+               const amountNumber  = parseFloat(amount);
+               return amountNumber;
+        }
 
 
 
